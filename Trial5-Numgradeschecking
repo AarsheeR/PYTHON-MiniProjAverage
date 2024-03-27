@@ -1,0 +1,61 @@
+def CalculateAverage():
+    global total, average, grades
+    total = sum(grades)
+    average = total / len(grades)
+
+    LetterGrade()
+
+def LetterGrade():
+    match average:
+        case grade if grade >= 90:
+            print("Letter Grade: A")
+        case grade if grade >= 80:
+            print("Letter Grade: B")
+        case grade if grade >= 70:
+            print("Letter Grade: C")
+        case grade if grade >= 60:
+            print("Letter Grade: D")
+        case _:
+            print("Letter Grade: F")
+
+    GradeScale()
+
+def GradeScale():
+    match average:
+        case grade if grade >= 90:
+            print("Grade Scale: 4")
+        case grade if grade >= 80:
+            print("Grade Scale: 3")
+        case grade if grade >= 70:
+            print("Grade Scale: 2")
+        case grade if grade >= 60:
+            print("Grade Scale: 1")
+        case _:
+            print("Grade Scale: 0")
+
+def main():
+    AskingHowMany()
+
+def AskingHowMany():
+    global grades, numgrades
+    grades = []
+    numgrades = str(input("Enter the number of grades you would like to input: "))
+    numlist = list(numgrades)
+    for i in range(len(numlist)):
+      numascii = ord(numlist[i])
+      if (numascii < 48 or numascii > 57):
+        print("Please enter a valid number")
+        AskingHowMany()
+      else: 
+        checking = True
+
+    if (checking == True):
+      numgrades = int(numgrades)
+      for i in range(numgrades):
+        grade = float(input("Enter a grade : "))
+        grades.append(grade)   
+      CalculateAverage()
+    
+
+if __name__ == "__main__":
+    main()
