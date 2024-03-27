@@ -10,15 +10,15 @@ def CalculateAverage():
 def LetterGrade():
     match average:
         case grade if grade >= 90:
-            print("Letter Grade: A")
+            print("Grade Scale: 4")
         case grade if grade >= 80:
-            print("Letter Grade: B")
+            print("Grade Scale: 3")
         case grade if grade >= 70:
-            print("Letter Grade: C")
+            print("Grade Scale: 2")
         case grade if grade >= 60:
-            print("Letter Grade: D")
+            print("Grade Scale: 1")
         case _:
-            print("Letter Grade: F")
+            print("Grade Scale: 0")
     
     GradeScale()
 
