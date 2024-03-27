@@ -1,0 +1,73 @@
+'''
+Name: Aarshee Rahman
+Start Date: 3/25/24
+End Date: 3/25/24
+Description: This program will calculate the average of grades and display the original calculated average, the letter grade equivalent, and the grade scale (0-4) equivalent.
+
+'''
+
+def CalculateAverage():
+    global total, average, grades
+    total = sum(grades)
+    average = total / len(grades)
+    
+    LetterGrade()
+
+def LetterGrade():
+    match average:
+        case grade if grade >= 90:
+            print("Letter Grade: A")
+        case grade if grade >= 80:
+            print("Letter Grade: B")
+        case grade if grade >= 70:
+            print("Letter Grade: C")
+        case grade if grade >= 60:
+            print("Letter Grade: D")
+        case _:
+            print("Letter Grade: F")
+    
+    GradeScale()
+
+def GradeScale():
+    match average:
+        case scale if scale >= 90:
+            print("Grade Scale: 4")
+        case scale if scale >= 80:
+            print("Grade Scale: 3")
+        case scale if scale >= 70:
+            print("Grade Scale: 2")
+        case scale if scale >= 60:
+            print("Grade Scale: 1")
+        case _:
+            print("Grade Scale: 0")
+
+    AskingHowMany()
+
+def AskingHowMany():
+    global grades, numgrades
+    grades = []
+    numgrades = str(input("Enter the number of grades you would like to input: "))
+    newnum = ord(numgrades)
+    print(newnum)
+    if (int(newnum) <= 47 or int(newnum) >= 57):
+        print("Invalid input. Please only input positive whole numbers.")
+        AskingHowMany();
+    else:
+        checknum = float(numgrades) % 1 
+        
+    if (checknum != 0 or float(numgrades) <= 0):
+        print("Invalid input. Please only input positive whole numbers.")
+        AskingHowMany();
+    else:
+        howmany = int(numgrades) 
+        print(str(howmany))
+        for i in range(0,howmany):
+            grade = float(input("Enter a grade : "))
+            grades.append(grade)   
+        CalculateAverage();
+        
+def main():
+    AskingHowMany()
+
+if __name__ == "__main__":
+    main()
