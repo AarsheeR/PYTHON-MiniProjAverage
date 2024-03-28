@@ -1,0 +1,114 @@
+'''
+Name: Aarshee Rahman
+Start Date: 3/25/24
+End Date: 3/25/24
+Description: This program will calculate the average of grades and display the original calculated average, the letter grade equivalent, and the grade scale (0-4) equivalent.
+'''
+
+def CalculateAverage():
+    global total, average, grades;
+    total = sum(grades);
+    average = total / len(grades);
+    print("Average: " + str(average));
+    LetterGrade();
+
+#Calculate letter grade equivalent (A,B,C,D,F)
+def LetterGrade():
+    match average:
+        case grade if grade >= 90:
+            print("Letter Grade: A");
+        case grade if grade >= 80:
+            print("Letter Grade: B");
+        case grade if grade >= 70:
+            print("Letter Grade: C");
+        case grade if grade >= 60:
+            print("Letter Grade: D");
+        case _:
+            print("Letter Grade: F");
+
+    GradeScale();
+    
+#Calculate 4.0 grade scale equivalent (0,1,2,3,4)
+def GradeScale():
+    match average:
+        case grade if grade >= 90:
+            print("Grade Scale: 4");
+        case grade if grade >= 80:
+            print("Grade Scale: 3");
+        case grade if grade >= 70:
+            print("Grade Scale: 2");
+        case grade if grade >= 60:
+            print("Grade Scale: 1");
+        case _:
+            print("Grade Scale: 0");
+            
+    main();
+
+
+#Asking how many grades the user would like to input and checking that input
+def AskingHowMany():
+    global grades, numgrades, numreplace;
+    grades = [];
+    numreplace = 0;
+    numgrades = str(input("Enter the number of grades you would like to input: "));
+    numlist = list(numgrades);
+    for i in range(len(numlist)):
+        numascii = ord(numlist[i]);
+        if (numascii < 48 or numascii > 57):
+            print("Please enter a positive whole number.");
+            AskingHowMany();
+        else: 
+            checking = True;
+
+    if (int(numgrades) == 0):
+        print("Bye. Thank you!");
+        AskingHowMany();
+        
+    if (checking == True):
+        numgrades = int(numgrades);
+        AskGrades();
+            
+#Asking for grades and checking the input
+def AskGrades():
+    global numreplace;
+    while numreplace < numgrades:
+        grade = str(input("Enter a grade : "));
+        if (grade == "."):
+            print("Please enter a number between 0-100.");
+            AskGrades();
+        gradelist = list(grade);
+        lengrade = len(grade);
+        validinp = True;
+        decimalchk = 0;
+        for i in range(lengrade):
+            if ((gradelist[i]) == "."):
+                decimalchk = decimalchk + 1
+        if (decimalchk > 1):
+            print("Please enter a number between 0-100.");
+            AskGrades();
+                
+        i = 0;
+        while i < lengrade:
+                numascii = ord(gradelist[i]);
+                if (numascii < 46 or numascii > 57 or numascii == 47):
+                    print("Please enter a number between 0-100.");
+                    validinp = False;
+                    AskGrades();
+                else: 
+                    i = i + 1;
+                
+        if (validinp == True and (0 <= float(grade) <= 100)):
+            grades.append(float(grade));
+            numreplace = numreplace + 1;
+        else:
+            print("Please enter a number between 0-100.");        
+            AskGrades();
+
+    CalculateAverage();
+    
+def main():
+    AskingHowMany();
+    
+#Call to Main
+if __name__ == "__main__":
+    main();
